@@ -37,7 +37,7 @@ class App
 
             $text = "Test {$counter}: ";
             if ($res == $expected) {
-                $text .= 'ok';
+                $text .= "ok (result: {$res}, input: " . implode('; ', $arguments) . ")";;
             } else {
                 $text .= "ERROR (expected: {$expected}, actual: {$res}, input: "
                     . implode('; ', $arguments)
