@@ -27,6 +27,7 @@ class App
 
             fclose($inFile);
             $expected = trim(fgets($outFile));
+            fclose($outFile);
 
             $timeStart = microtime(true);
             $res = $solution->solve(...$arguments);
