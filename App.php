@@ -39,7 +39,9 @@ class App
             if ($res == $expected) {
                 $text .= 'ok';
             } else {
-                $text .= "ERROR (expected: {$expected}, actual: {$res})";
+                $text .= "ERROR (expected: {$expected}, actual: {$res}, input: "
+                    . implode('; ', $arguments)
+                    . ")";
             }
 
             $text .= " | time {$time}";
