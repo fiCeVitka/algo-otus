@@ -10,6 +10,10 @@ class Solution2
         $result = 1;
         $d = $value;
 
+        if ($power % 2 === 1) {
+            $result *= $d;
+        }
+
         while ($power > 0) {
             $power = (int)floor($power / 2);
             $d *= $d;
