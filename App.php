@@ -22,7 +22,7 @@ class App
 
             $arguments = [];
             while ($argument = fgets($inFile, 4096)) {
-                $arguments[] = $argument;
+                $arguments[] = trim($argument);
             }
 
             fclose($inFile);
