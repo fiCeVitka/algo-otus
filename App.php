@@ -5,8 +5,9 @@ class App
     public function boot($argv)
     {
         $path = $argv[1];
+        $solutionFile = $argv[2] ?? 'Solution';
 
-        $solution = new Solution();
+        $solution = new $solutionFile;
         $counter = 0;
 
         while (true) {
