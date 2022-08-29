@@ -5,13 +5,17 @@
  */
 class Solution2
 {
-    public function solve(int $n): float
+
+    public function solve(int $n)
     {
-        $fi = (1 + sqrt(5)) / 2;
+        bcscale(13);
 
-        $value = $this->pow($fi, $n) / sqrt(5) + 0.5;
+        $fi = bcdiv(bcadd(1, bcsqrt(5)),2);
 
-        return floor($value);
+        $del = bcdiv($this->pow($fi, $n), sqrt(5));
+        $value = bcadd($del, 0.5);
+
+        return bcdiv($value, 1, 0);
     }
 
     public function pow(float $value, int $power)
@@ -20,18 +24,18 @@ class Solution2
         $d = $value;
 
         if ($power % 2 === 1) {
-            $result *= $d;
+            $result = bcmul($result, $d);
         }
 
         while ($power > 0) {
             $power = (int)floor($power / 2);
-            $d *= $d;
+            $d = bcmul($d, $d);
 
             if ($power % 2 === 1) {
-                $result *= $d;
+                $result = bcmul($result, $d);
             }
         }
 
-        return round($result, 11);
+        return $result;
     }
 }

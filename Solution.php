@@ -21,7 +21,7 @@ class Solution
             return $this->cache[$n];
         }
 
-        $this->cache[$n] = $this->solve($n - 1) + $this->solve($n - 2);
+        $this->cache[$n] = bcadd($this->solve($n - 1), $this->solve($n - 2));
 
         return $this->cache[$n];
     }

@@ -5,8 +5,10 @@
  */
 class Solution3
 {
-    public function solve(int $n): float
+    public function solve(int $n): string
     {
+        bcscale(13);
+
         $matrix = new Matrix();
 
         if ($n === 0) {
@@ -19,7 +21,7 @@ class Solution3
 
         $matrix = $this->pow($matrix, $n);
 
-        return floor($matrix->rightBottom());
+        return bcdiv($matrix->rightBottom(), 1, 0);
     }
 
     public function pow(Matrix $value, int $power): Matrix
