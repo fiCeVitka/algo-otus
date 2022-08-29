@@ -37,10 +37,20 @@ class App
             $time = $timeEnd - $timeStart;
 
             $text = "Test {$counter}: ";
-            if ($res == $expected) {
-                $text .= "ok (result: {$res}, input: " . implode('; ', $arguments) . ")";;
+            $resText = (string)$res;
+            if (strlen($resText) > 20) {
+                $resText = substr($resText, 0, 20) . '...';
+            }
+
+            if ((string)$res === (string)$expected) {
+                $text .= "ok (result: {$resText}, input: " . implode('; ', $arguments) . ")";;
             } else {
-                $text .= "ERROR (expected: {$expected}, actual: {$res}, input: "
+                $expectedText = $expected;
+                if (strlen($expectedText) > 20) {
+                    $expectedText = substr($expectedText, 0, 20) . '...';
+                }
+
+                $text .= "ERROR (expected: {$expectedText}, actual: {$resText}, input: "
                     . implode('; ', $arguments)
                     . ")";
             }
@@ -50,5 +60,18 @@ class App
 
             $counter++;
         }
+    }
+
+    private function formatMemory(int $value): string
+    {
+        if ($value < 1024) {
+            return $value.' bytes';
+        }
+
+        if ($value < 1048576) {
+            return round($value / 1024, 2) . ' kilobytes';
+        }
+
+        return round($value/1048576,2).' megabytes';
     }
 }
