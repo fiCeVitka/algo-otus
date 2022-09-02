@@ -1,20 +1,21 @@
 <?php
 
 /**
- * Bubble Sort
+ * Insertion Sort with shift
  */
-class Solution
+class Solution3
 {
     public function solve(int $n, string $values): string
     {
         $array = explode(' ', $values);
 
         for ($i = 1; $i < $n; $i++) {
-            for ($j = 0; $j < $n - $i; $j++) {
-                if ($array[$j] > $array[$j + 1]) {
-                    $this->swap($array, $j, $j + 1);
-                }
+            $k = $array[$i];
+            for ($j = $i - 1; $j >= 0 && $array[$j] > $k; $j--) {
+                $array[$j + 1] = $array[$j];
             }
+
+            $array[$j + 1] = $k;
         }
 
         return implode(' ', $array);
