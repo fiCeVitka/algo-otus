@@ -1,18 +1,18 @@
 <?php
 
 /**
- * Bubble Sort
+ * Shell Sort
  */
-class Solution
+class Solution5
 {
     public function solve(int $n, string $values): string
     {
         $array = explode(' ', $values);
 
-        for ($i = 1; $i < $n; $i++) {
-            for ($j = 0; $j < $n - $i; $j++) {
-                if ($array[$j] > $array[$j + 1]) {
-                    $this->swap($array, $j, $j + 1);
+        for ($gap = (int)($n / 2); $gap > 0; $gap = (int)($gap / 2)) {
+            for ($i = $gap; $i < $n; $i++) {
+                for ($j = $i; $j >= $gap && $array[$j - $gap] > $array[$j]; $j -= $gap) {
+                    $this->swap($array, $j, $j - $gap);
                 }
             }
         }

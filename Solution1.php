@@ -1,19 +1,26 @@
 <?php
 
 /**
- * Bubble Sort
+ * Bubble Sort with optimization
  */
-class Solution
+class Solution1
 {
     public function solve(int $n, string $values): string
     {
         $array = explode(' ', $values);
 
         for ($i = 1; $i < $n; $i++) {
+            $swap = false;
+
             for ($j = 0; $j < $n - $i; $j++) {
                 if ($array[$j] > $array[$j + 1]) {
                     $this->swap($array, $j, $j + 1);
+                    $swap = true;
                 }
+            }
+
+            if (!$swap) {
+                break;
             }
         }
 
