@@ -22,7 +22,7 @@ class App
             $outFile = fopen($path . DIRECTORY_SEPARATOR . $out, 'rb');
 
             $arguments = [];
-            while ($argument = fgets($inFile, 4096)) {
+            while ($argument = fgets($inFile)) {
                 $arguments[] = trim($argument);
             }
 
@@ -37,21 +37,16 @@ class App
             $time = $timeEnd - $timeStart;
 
             $text = "Test {$counter}: ";
-            $resText = (string)$res;
-            if (strlen($resText) > 20) {
-                $resText = substr($resText, 0, 20) . '...';
-            }
+            $resText = $this->formatText($res);
+            $argumentsText = $this->formatText(implode('; ', $arguments));
 
             if ((string)$res === (string)$expected) {
-                $text .= "ok (result: {$resText}, input: " . implode('; ', $arguments) . ")";;
+                $text .= "ok (result: {$resText}, input: " . $argumentsText . ")";;
             } else {
-                $expectedText = $expected;
-                if (strlen($expectedText) > 20) {
-                    $expectedText = substr($expectedText, 0, 20) . '...';
-                }
+                $expectedText = $this->formatText($expected);
 
                 $text .= "ERROR (expected: {$expectedText}, actual: {$resText}, input: "
-                    . implode('; ', $arguments)
+                    . $argumentsText
                     . ")";
             }
 
@@ -73,5 +68,14 @@ class App
         }
 
         return round($value/1048576,2).' megabytes';
+    }
+
+    private function formatText(string $text): string
+    {
+        if (strlen($text) <= 20) {
+            return $text;
+        }
+
+        return substr($text, 0, 20) . '...';
     }
 }
